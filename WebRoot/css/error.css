@@ -1,0 +1,14 @@
+.error_wrap{
+	font-size:14px;
+	margin: 40px auto 110px;
+	padding: 70px 0 70px;
+	width: 500px;
+	/*background: url(/images/comm/error-pig.jpg) no-repeat 0 center;*/
+	word-break: break-all;
+	text-align: center;
+}
+@media only screen and (max-width: 710px){
+    body {font-size:17.77778px!important}
+	.wrap{padding:1em 0;}
+    .wrap,.error_wrap {width:auto;max-width: 700px}
+}

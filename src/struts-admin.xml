@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="admin" extends="struts-default" namespace="/admin">
+		<interceptors>
+			<interceptor-stack name="authority">
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>  
+					<param name="exception.logLevel">error</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="authority"></default-interceptor-ref>
+		<global-results>
+			<result name="sysError">/commonPage/system/sysError.jsp</result><!-- 系统错误提示页 -->
+			<result name="error">/commonPage/system/error.jsp</result><!-- 错误提示页 -->
+			<result name="noSession">/WEB-INF/page/loginPage/adminLoginUI.jsp</result><!-- 没有session页 -->
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="error"
+				exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+	</package>
+</struts>

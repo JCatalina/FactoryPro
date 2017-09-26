@@ -1,0 +1,72 @@
+html{word-break:break-all;}
+.select-4 a{width: 25%;}
+
+.my-coupon-nav .box-selects{padding: 0;}
+.my-coupon-nav .box-selects a{position: relative;border-color: #d8d8d8}
+.my-coupon-nav .box-selects .cur{border-bottom:1px solid #d8d8d8;}
+.my-coupon-nav .box-selects a:after{content:'';border-left:1px solid #d8d8d8;position: absolute;top: 10px;right: 0;height: 18px;width: 0;}
+.my-coupon-nav .box-selects a:last-child:after{border:0;}
+
+.coupon-list{padding:10px;font-size: 11px;}
+.coupon-list li,.coupon-list label{max-width:348px;margin:0 auto 10px;border:1px solid #d8d8d8;border-radius:5px;box-shadow: 0 0 7px rgba(53,53,53,.17);overflow: hidden;position: relative;}
+.coupon-list label{display:block;}
+.coupon-list [type=radio]{position:absolute;top:-99px;left:-99px;}
+.coupon-list :checked+label .info{background: #ffecec;position:relative}
+.coupon-list :checked+label .info:after{content:'';position:absolute;width:100%;height:10px;background:#ffecec;top:-10px;left:0;z-index: -1;}
+.coupon-list .price-with-color{position: relative;box-sizing:border-box;height: 82px;color:#fff;padding: 20px 15px 15px 15px;background-size: 15px 15px;background-position: 2px 0;}
+.my-coupon .price-with-color:before{content:'';position: absolute;top: 0;left: 0;right: 0;bottom: 5px;z-index: -2;}
+
+.coupon-green .price-with-color{background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #48bb60 5px);}
+.coupon-green .price-with-color:before{background:#48bb60;}
+.coupon-orange .price-with-color{background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #f0ac47 5px);}
+.coupon-orange .price-with-color:before{background:#f0ac47;}
+.coupon-blue .price-with-color{background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #10a6e1 5px);}
+.coupon-blue .price-with-color:before{background:#10a6e1;}
+.coupon-gray .price-with-color{background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #d1cfd0 5px);}
+.coupon-gray .price-with-color:before{background:#d1cfd0;}
+
+.coupon-gray:after,.coupon-list .info .icon{background:url(../images/wx/coupon.png) no-repeat;background-size: 97px auto;}
+
+.coupon-gray:after{content:'';position: absolute;width: 97px;height: 76px;right: 40px;top: 50%;margin-top: -38px;background-position: 0 -22px;}
+.coupon-none:after{display:none}
+
+.coupon-list .price-with-color .title{margin: 0;margin-bottom: 12px;line-height: 1.2;margin-right: 85px;font-size: 16px;font-weight: normal;}
+.coupon-list .price-with-color .desc{line-height: 1.4;margin-right: 75px;}
+.coupon-list .price-with-color .price-right{position: absolute;right: 15px;top: 18px;}
+.coupon-list .price-with-color .price-right p{margin-top: 12px;text-align: right;}
+.coupon-list .price-with-color .price-right .price strong{font-size: 23px;margin-left: 3px;font-weight: normal;}
+
+.coupon-list .info{color:#4d4d4d;padding:14px 19px;border-radius:0 0 5px 5px;}
+.coupon-list .info p{margin-bottom: 8px;line-height: 1.4;}
+.coupon-list .info p:last-child{margin-bottom: 0;}
+.coupon-list .info .icon{display: inline-block;width: 13px;height: 13px;margin-right: 10px;margin-bottom: -4px;}
+.coupon-list .info .i-clock{background-position: -22px 0}
+.coupon-list .info .i-warn{background-position: 0 0}
+
+.shop-coupon-list li{border-width:1px 0 1px 1px;border-style:solid;padding:14px 19px;border-radius: 5px 0 0 5px;box-shadow: -1px 0 3px rgba(53,53,53,.17);}
+.shop-coupon-list .price-with-color{background:#fff;color:#4d4d4d;padding: 0;position: static;height: auto;margin-bottom: 12px;}
+.shop-coupon-list .price-with-color .title,.shop-coupon-list .price-with-color .desc{margin-right: 0;}
+.shop-coupon-list .price-with-color,.shop-coupon-list .info{margin-right: 105px;}
+.shop-coupon-list .info{padding: 0;}
+.shop-coupon-list .price-with-color .price-right{padding-top: 25px;color:#fff;text-align: center;width: 105px;top: 0;right: 0;bottom: 0;background-size: 15px 15px;background-position: 8px 2px;}
+.shop-coupon-list .price-with-color .price-right p{text-align: center;font-size: 16px;}
+
+.shop-coupon-list .coupon-green{border-color:#48bb60;}
+.shop-coupon-list .coupon-green .title{color:#48bb60;}
+.shop-coupon-list .coupon-orange{border-color:#f0ac47;}
+.shop-coupon-list .coupon-orange .title{color:#f0ac47;}
+.shop-coupon-list .coupon-blue{border-color:#10a6e1;}
+.shop-coupon-list .coupon-blue .title{color:#10a6e1;}
+.shop-coupon-list .coupon-gray{border-color:#d1cfd0;}
+.shop-coupon-list .coupon-gray .title{color:#d1cfd0;}
+
+.shop-coupon-list .price-right:before{content:'';position: absolute;top: 0;left: 5px;right: 5px;bottom: 0;z-index: -2;}
+
+.shop-coupon-list .coupon-green .price-right{background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #48bb60 5px);}
+.shop-coupon-list .coupon-green .price-right:before{background:#48bb60;}
+.shop-coupon-list .coupon-orange .price-right{background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #f0ac47 5px);}
+.shop-coupon-list .coupon-orange .price-right:before{background:#f0ac47;}
+.shop-coupon-list .coupon-blue .price-right{background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #10a6e1 5px);}
+.shop-coupon-list .coupon-blue .price-right:before{background:#10a6e1;}
+.shop-coupon-list .coupon-gray .price-right{background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #d1cfd0 5px);}
+.shop-coupon-list .coupon-gray .price-right:before{background:#d1cfd0;}

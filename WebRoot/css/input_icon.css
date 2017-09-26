@@ -1,0 +1,76 @@
+﻿.login_content{width:768px;margin:0 auto;padding:70px 0}
+.l_title a{padding: 0 24px;display: inline-block;line-height: 40px;color: gray;margin-bottom:28px;}
+.l_title a.now:hover{text-decoration:none}
+.l_title .now{background:#E6E6E6;color:#000}
+
+.login_handle,.reg_handle{height:40px;line-height:40px;}
+.login_handle label{margin:0 40px 0 0}/*75*/
+.login_handle label input,.reg_handle label input{vertical-align:-2px}
+.login_handle a{margin:0 8px 0 0}
+
+.blue_submit{background:#85C9D6;}
+.login_handle .red_submit{width:104px;padding-right:30px;*padding-right:20px;}
+.red_submit.disabled{background:gray;cursor:default}
+.login_handle .cube{width:7px;height:7px;background:#FFF;top:17px;right:116px;cursor:pointer;*right:100px}
+.login_handle .tri_big{width:8px;height:16px;overflow:hidden;margin:-5px 0 0 7px;}
+.login_handle .tri_big em{font-style:normal;color:#FFF;font-size:16px;margin:-11px 0 0 -8px;*margin-left:-7px;display:inline-block;font-family:"SimSun"}
+
+.reg_handle .red_submit{padding:0;margin-left:48px;}
+
+.login_content .fl,.setting_left1{border-right:1px solid #CCC;width:390px;}
+
+.login_content p.red{margin-bottom:20px;display:none}
+
+
+.input_frame{margin:0 0 20px 0;border:1px solid #CCC;width:298px;height:38px;position:relative;background:#FFF}
+
+/*登录和注册 左边*/
+.i_username,.i_password,.i_mail,.i_password2,.i_code,.i_sex,.i_nickname,.i_birth,.i_addr,.i_call,.i_sina,.i_qq,.i_job{
+	background:url(../images/icon1.png) no-repeat;
+	width:25px;height:25px;
+	float:left;
+	border-right:2px solid #CCC;padding:0 1px 0 0;
+	margin:7px 0 0 1px
+}
+
+.i_username{background-position:0 -118px}
+.i_password{background-position:-35px -118px}
+.i_mail{background-position:-105px -118px}
+.i_password2{background-position:-70px -118px}
+.i_code{background-position:-140px -118px}
+
+.i_sex{background-position:0 -188px}
+.i_nickname{background-position:-35px -188px}
+.i_birth{background-position:-70px -188px}
+.i_addr{background-position:-105px -188px}
+.i_call{background-position:-140px -188px}
+.i_job{background-position: -175px -188px}
+
+
+
+.lr_input,.input_frame .input_tips,.input_frame select.lr_input{margin:0;border:0;padding:11px 10px 8px;width:248px;background:#FFF;font-size:14px;}
+.input_frame select.lr_input{width:268px;padding:10px 10px 9px 8px;color:gray;}
+.input_frame .input_tips{height:15px;position:absolute;top:0;left:30px;border:0;margin:0;cursor:text;color:gray;background:#FFF;padding:10px 10px 5px;}
+
+.input_frame .code{top:8px;right:0;cursor:pointer}
+.i_tick,.i_cross,.i_refresh{position:absolute;top:10px;right:-28px;display:inline-block;background:url(../images/icon1.png) no-repeat;width:16px;height:16px}
+.i_tick{background-position:-87px -70px}
+.i_cross{background-position:-117px -70px;display:none}
+.i_refresh{background-position:-146px -69px;width:18px;height:17px;cursor:pointer;right:-52px}
+
+/*右边*/
+.i_sina,.i_qq{height:40px;width:40px;background-color:#BE1D2C;float:left;border-right:1px solid #DF8E96;background-position:6px 8px;padding:0;margin:0}
+.i_qq{background-color:#1A75BB;background-position:-33px 8px;border-color:#8DBADD}
+
+.login_content .fr,.setting_left2{width:300px;padding:0 0 0 76px;}
+.login_content .fr p.lh40{margin-bottom:28px}
+.login_content .fr .fix a{display:block;}
+.login_content .fr .fix a:hover{text-decoration:none;opacity:.8;filter:alpha(opacity=80)}
+.login_content .fr .fix p{height:40px;line-height:40px;color:#FFF;font-size:16px;background:#BE1D2C;width:299px;text-indent:18px;}
+.login_content .fr .fix p.mb40{background:#1A75BB}
+
+/*覆盖日期插件*/
+.input_frame .Wdate{border:0;height:auto;background-position:242px center;}
+
+/*按钮*/
+.chk_act{background:#E6E6E6;text-align:center; width:100px;height:38px;line-height:38px;color:#4D4D4D;position:absolute;display:block;cursor:pointer;font-size:14px;right:0;top:0}

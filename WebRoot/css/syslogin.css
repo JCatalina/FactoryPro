@@ -1,0 +1,26 @@
+﻿*{margin: 0;padding: 0;}
+html{background:url(../images/sys/bg.png) repeat;}
+html,input{font-family: 'Microsoft Yahei';color:#333;}
+
+.ac{text-align: center;}
+.login{
+  width: 612px;height: 654px;position: absolute;top: 45%;left:50%;margin:-327px 0 0 -306px;background:url(../images/sys/login.png) no-repeat;
+  -webkit-transform:scale(.85);transform:scale(.85);
+}
+.login .rel{position: relative;padding:228px 0 0 0;}
+.login .rrel{position: relative;padding:90px 0 0 0;}
+.login .title{margin-bottom: 25px;}
+
+.login .input{display: block;font-size: 18px;position: relative;height:44px;line-height: 44px;margin:0 75px 27px 76px;}
+.login .input span{display: inline-block;width: 72px;overflow:hidden;white-space:nowrap;float:left;}
+.login .input input{float:left;border:none;width:324px;height:44px;line-height: 44px;padding:0 10px 0 54px;background:none;vertical-align: middle;position: relative;}
+.login .input input:focus,.login .submit:focus{outline: none}
+.login .input i{font-style: normal;margin-right: 1em;}
+
+.login .code{margin-bottom: 30px;}
+.login .code input{width:215px;}
+.login .code img{width: 90px;height: 30px;position: absolute;top: 7px;right: 10px;}
+
+.login .submit{display: inline-block;color:#fff;width: 464px;height: 50px;font-size: 24px;background:none;border:none;cursor:pointer;}
+
+.login .err-text{color:red;position: absolute;/* width: 30%; */top: 506px;right: 75px;text-align: right;line-height: 1.4;white-space: nowrap;}

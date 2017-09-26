@@ -1,0 +1,16 @@
+body{font-size:14px;line-height:1.4}
+
+.mr05e{margin-right:.5em}
+.mr1e{margin-right:1em}
+.mr2e{margin-right:2em}
+
+table{border-collapse: collapse;margin-bottom:5px}
+td{padding:0 6px;vertical-align:middle}
+.border-tb td{border:1px solid #333}
+
+.fl{float:left}
+.mr20{margin-right:20px;}
+
+.bk{word-wrap:break-word;word-break: break-all;}
+.bl0{border-left:none}
+.br0{border-right:none}

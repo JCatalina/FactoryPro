@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<constant name="struts.custom.i18n.resources" value="messageResource"/>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+	<constant name="struts.multipart.maxSize" value="30000000"/>
+	<constant name="struts.convention.classes.reload" value="true" />
+	
+	<include file="struts-admin.xml"></include> 
+	
+	<package name="default" extends="struts-default" namespace="/default">
+		<interceptors>
+			<interceptor-stack name="authority">
+				<interceptor-ref name="defaultStack">
+					 <param name="exception.logEnabled">true</param>  
+					<param name="exception.logLevel">error</param> 
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="authority"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="sysError">/commonPage/system/sysError.jsp</result>
+			<result name="noAuthority">/commonPage/system/no_authority.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+		<exception-mapping result="sysError"
+				exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		
+		
+		<action name="notfound">
+			<result>/notFound.jsp</result>
+		</action>
+		
+		<action name="*">
+			<result type="redirect">notfound</result>
+		</action>
+
+	</package>
+</struts>    

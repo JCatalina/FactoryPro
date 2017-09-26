@@ -1,0 +1,55 @@
+#input_div {
+	position:absolute;
+    border: 1px solid #67a1e1;
+    display: none;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    height:192px;
+    width:152px;
+    text-decoration: none;  
+    background-color: #FFFAFA;
+    z-index: 2000;
+}
+#input_div em,#input_div i{font-style:normal}
+#input_div div {  
+    vertical-align: middle;  
+    text-align: left;
+    padding: 4px;
+    color: #67a1e1;  
+    width: 100%;
+}
+
+.div_item_select {  
+    background-color: #E0EEEE;
+    text-align: left;
+    cursor: pointer;
+}
+
+#flightNoSelect {
+	position:absolute;
+    border: 1px solid #67a1e1;
+    display: none;
+    overflow:hidden; 
+    overflow-y: scroll;
+    text-decoration: none;  
+    background-color: #FFFAFA;
+    z-index:9999;
+}
+  
+#flightNoSelect div {  
+    vertical-align: middle;  
+    padding: 4px;
+    color: #67a1e1;  
+    width: 100%;  
+}
+#input_div::-webkit-scrollbar-thumb{background:#67a1e1}
+#input_div::-webkit-scrollbar-thumb:hover{background:#BDD7F2}
+#input_div::-webkit-scrollbar-thumb:active{background:#2469B5}
+/*#input_div{
+SCROLLBAR-FACE-COLOR: #67a1e1;
+SCROLLBAR-HIGHLIGHT-COLOR: #FFFFFF;
+SCROLLBAR-SHADOW-COLOR: #67a1e1;
+SCROLLBAR-3DLIGHT-COLOR: #67a1e1;
+SCROLLBAR-ARROW-COLOR: #ffffff;
+SCROLLBAR-TRACK-COLOR: #E6E6E6;
+SCROLLBAR-DARKSHADOW-COLOR: #67a1e1;}*/

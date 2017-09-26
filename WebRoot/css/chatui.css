@@ -1,0 +1,84 @@
+@charset "UTF-8";
+.head-title{position:absolute;}
+.head-title.fixed{position:fixed;}
+
+/* 中间 */
+.chat-container{position: absolute; top:46px; bottom:49px; left:0; width:100%; overflow:auto; -webkit-overflow-scrolling: touch; box-sizing: border-box; }
+.chat-time{margin:0 0 15px;text-align:center;}
+.chat-time span{display:inline-block;color:#999}
+.chat-item{padding: 15px 0 0;overflow:hidden;}
+.chat-item:last-child{padding-bottom: 15px;}
+.chat-item .chat-content{ max-width: 200px; min-height: 40px; font-size: 1.1em; color: #2c2c2c; font-weight: 500; box-sizing: border-box; background-color: #e8e8e8; padding: 10px; margin-top: 8px; display: inline-block; border-radius: 5px; word-break: break-all; position: relative; }
+.chat-item .chat-content div{line-height: 1.4;font-size: 1.015rem;}
+.chat-item .chat-content:before,.chat-item .chat-content:after{ content: ''; position: absolute; top: 8px; width: 0; height: 0; }
+.chat-send .chat-content:before{ right: -7px; border-top: 14px solid rgb(246,199,200); border-right: 7px solid transparent; }
+.chat-send .chat-content:after{ right: -7px; border-top: 3px solid #f4f4f4; border-right: 7px solid transparent; }
+.chat-receive .chat-content:before{ left: -7px; border-top: 14px solid #fff; border-left: 7px solid transparent; }
+.chat-receive .chat-content:after{ left: -7px; border-top: 3px solid #f4f4f4; border-left: 7px solid transparent; }
+.chat-send .chat-content{margin-right:10px;background-color:rgb(246,199,200);}
+.chat-send .chat-content:after{left:0%;border-color:transparent transparent transparent rgb(246,199,200);border-width:5px 0 5px 5px;}
+.chat-send .chat-content div{text-align: left;}
+.chat-receive .chat-content{margin-left:10px;background-color:#fff}
+.chat-receive .chat-content img{max-width:100%}
+.chat-receive .chat-content:after{right:100%;border-color:transparent #fff transparent transparent;border-width:5px 5px 5px 0;}
+
+/* 头像 & 店名*/
+.chat-send .chat-box{float: right;text-align: right;}
+.chat-receive .chat-box{float: left;}
+.chat-send .chat-head{float: right;width: 40px;height: 40px;margin-right: 14px;}
+.chat-send .chat-head img{max-width: 100%;border-radius: 5px;}
+.chat-receive .chat-head{float: left;width: 40px;height: 40px;margin-left: 14px;}
+.chat-receive .chat-head img{max-width: 100%;border-radius: 5px;}
+.chat-send .chat-shop{margin-right: 10px;}
+.chat-receive .chat-shop{margin-left: 10px;}
+
+/* 图片进度 */
+.chat-content .chat-pic-loading{display: block;position: relative;width: 80px;height: 60px;line-height: 60px;background: url(../images/wx/chat/pic-gray.png) no-repeat 50%;background-size: 48px;font-size: 16px;text-align: center;}
+.chat-content .chat-pic-loading span{position: relative;color:#fefefe;z-index: 2;}
+.chat-content .chat-pic-loading .progress{display: block;position: absolute;bottom: 0;left: 0;right: 0;background:rgba(0,0,0,.3);z-index: 1;}
+.size1x1{width:1px;height: 1px;overflow: hidden;}
+
+/* 底部 */
+.chat-handler{position:absolute; bottom:0; left:0; width:100%; border-top:1px solid #e1e1e1; background:#fff; } .chat-handle-container{height: 46px;padding:5px;box-sizing: border-box;overflow: hidden;}
+
+.chat-handler strong [type=text]{font-size: 14px}
+.chat-handler span [type=submit]{background:#f44;color:#fff;margin-left:5px;width:40px;border:none;height:36px;border-radius:4px;padding:0;}
+.handle-icon{display: inline-block;box-sizing:border-box;height:36px;width:36px;border-radius:50%;border:1px solid #dfdfdf;background: no-repeat 50%;background-size:24px auto;margin-left: 5px;}
+.icon-emo{background-image:url(../images/wx/chat/icon-emo.png);}
+.icon-plus{background-image:url(../images/wx/chat/icon-plus.png);}
+.emo-on .icon-emo{background-image:url(../images/wx/chat/icon-keyboard.png);}
+.emo-on .chat-container{bottom: 201px;}
+.emo-on .chat-handle-container,.plus-on .chat-handle-container{height: auto;}
+.plus-on .chat-container{bottom: 124px;}
+.expreCon,.handelCon{padding-top: 10px;}
+.expreCon a {width: 44px;height: 39px;display: block;float: left;}
+.expreCon li {float: left;display: inline-block;background: url(../images/emo/expressImgA1.png) 50% no-repeat;background-size: 310px auto;}
+.expreCon li div,.handleCon li div{width:310px;margin: auto;overflow: hidden;}
+.expreCon .bg2{background-image:url(../images/emo/expressImgA2.png);}
+.expreCon .bg3{background-image:url(../images/emo/expressImgA3.png);}
+.expreCon .bg4{background-image:url(../images/emo/expressImgA4.png);}
+.expreCon .bg5{background-image:url(../images/emo/expressImgA5.png);}
+.pNumCon {width: 100%;line-height: 25px;clear: both;text-align: center;}
+.pNum {width: 6px;height: 6px;display: inline-block;margin-right: 3px;background-color: #dedede;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
+.pNumCon .on {background-color: #769cdc;}
+.chat-content .emo-img,.chat-content .em-emotion{width: 22px;margin: 0 3px;}
+.chat-content .pic-img{max-width:100%;}
+.handleCon a,.handleCon label{font-size:11px;text-align: center;float: left;display: block;box-sizing:border-box;margin: 2.5%;width:20%;padding-top: 13%;padding-bottom: 2%;border:1px solid #dfdfdf;border-radius:4px;background: no-repeat 50% 16%;background-size: 32px auto}
+.handleCon .icon-pic{background-image:url(../images/wx/chat/icon-pic.png);}
+.sound-record{position: relative;background: url(../images/wx/inquiry/sound.png) no-repeat 8px 50%;background-size: 16px auto;}
+.chat-item .sound-record{min-height:40px;min-width:120px;}
+.sound-record span{position: absolute;left:100%;margin-left: 14px;line-height: 20px;white-space: nowrap;}
+.chat-send .sound-record span{margin-left:0;margin-right:7px;left:auto;right:100%}
+.sound-record b{display: none;position: absolute;background:#fff;left: 14px;height: 100%;top: 0;width: 8px;}
+.chat-send .sound-record b{background-color:rgb(246,199,200);}
+.sound-record.playing b{display: block;}
+.sound-record .del{top: 5px;right: 5px;}
+
+/* 询价信息 */
+.chat-item .chat-detail{margin-right:15px; float: none; max-width: 100%; }
+.chat-item .chat-detail:after{margin-top: 0;top:14px;}
+.chat-content .inquiry-detail-table{width: 100%;font-size: 12px;line-height: 2;}
+.chat-content .inquiry-detail-table .ar{padding:5px 10px 5px 0;font-weight: bold;white-space: nowrap;}
+.chat-content .inquiry-detail-table .vt{vertical-align: top;padding-top: 0;}
+.chat-content .inquiry-detail-table .img{height:40px;float: left;margin: 0 10px 10px;}
+.chat-content .inquiry-detail-table .img img{display: block;height: 100%;}
