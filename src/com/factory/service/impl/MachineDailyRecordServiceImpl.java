@@ -192,6 +192,7 @@ public class MachineDailyRecordServiceImpl extends DefaultManagerBean implements
 						MachineDailyRecord record= 
 								new MachineDailyRecord(date, nos[i], AMs[i], BMs[i], CMs[i], DMs[i], sumMs[i], remarks[i],
 										machineStaff.getStaffA(),machineStaff.getStaffB(),new Staff(staffCIDs[i],null),new Staff(staffCIDs[i],null),i);
+						record.setVarietyName(varietyNames[i]);
 						this.defaultdDao.save(record);
 						//新增返回ID
 						JSONObject obj = new JSONObject();
