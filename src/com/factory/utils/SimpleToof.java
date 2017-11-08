@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 public class SimpleToof {
 	
-	public static DecimalFormat fmt = new DecimalFormat("0");
+	public static DecimalFormat fmt = new DecimalFormat("#.##");
 	
 	/**
 	 * 构建返回值格式
@@ -56,7 +56,6 @@ public class SimpleToof {
 	public static Double getTypeDouble(Double e){
 		fmt.setRoundingMode(RoundingMode.HALF_UP); //保留小数点后两位并四舍五入，确保价钱准确
 		Double d = Double.valueOf(fmt.format(e));
-		System.out.println(d);
 		return d;
 	}
 	

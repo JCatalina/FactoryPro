@@ -4,6 +4,7 @@ import java.io.File;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -22,9 +23,11 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.factory.common.BaseManagerAction;
+import com.factory.common.Constants;
 import com.factory.common.PageList;
 import com.factory.model.MachineDailyRecord;
 import com.factory.model.MachineStaff;
+import com.factory.model.SalaryPercentage;
 import com.factory.model.Staff;
 import com.factory.model.Variety;
 import com.factory.service.IMachineDailyRecordService;
@@ -68,7 +71,9 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 	private String[] remarks;
 	private String[] staffAIDs; //A班人员ID或者C班员工ID 参数
 	private String[] staffBIDs; //B班人员ID或者D班员工ID 参数
-	Map<Integer, HashMap<String, Double>> staffMonthlyReport;
+	Map<Integer, HashMap<String, Double>> staffMonthlyReport;//员工每个机台的 品种-米数 map
+	private HashMap<Integer, Double> everyMachineSalaryMap;//员工每个机台的工资map
+	private HashMap<Integer,Double> everyMachinePercentage;//每个机台的工价（倍率）
 	private String[] dateStrs;
 	
 	//汇总每月每天的数据
@@ -86,10 +91,10 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 	
 	private static final Integer VMSIZE = 5;//代表5组 品种-米数数据
 	private static final String[] HEAD_LIST={
-		"机台号","品种","米数","品种","米数","品种","米数","品种","米数","品种","米数"
+		"机台号","品种","米数","品种","米数","品种","米数","品种","米数","品种","米数","工价","金额","总价"
 	};
 	private static final String[] FIELD_LIST={
-		"no","v1","m1","v2","m2","v3","m3","v4","m4","v5","m5"
+		"no","v1","m1","v2","m2","v3","m3","v4","m4","v5","m5","per","money","sum"
 	};
 	
 	@Resource(name="machineDailyRecordService")
@@ -256,8 +261,9 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 	//根据  员工ID 和 月份 汇总个人工作总量（员工每月数据统计）
 	public String calculateStaffMonthlyReport() throws ParseException{
 		staffList= dm.getList(Staff.class);
-
+		sum = 0D;
 		if(queryObj !=null && !queryObj.getId().equalsIgnoreCase("-1") && SimpleToof.checkNotNull(createTime)){
+			//1、汇总计算员工本月的各机台的品种-米数。
 			Date date=MyDateUtils.formatDateToYearMonth(createTime);
 			queryObj.setCreateTime(date);
 			staffMonthlyReport = machineDailyRecordService.calculateStaffMonthlyReport(queryObj.getId(),date);
@@ -268,6 +274,13 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 				}
 			}
 			
+			//2、根据汇总计算的staffMonthlyReport(Map)计算各机台的工资
+			everyMachineSalaryMap =new HashMap<Integer, Double>();//记录员工每种机台的工资
+			everyMachinePercentage=new HashMap<Integer, Double>();//记录每种机台的工价
+			//调用方法
+			this.calSalaryByStaffMonthlyReport(staffMonthlyReport, everyMachineSalaryMap, everyMachinePercentage, sum, errMsg);
+			
+			
 		}else{
 			queryObj=new MachineDailyRecord(new Date());
 		}
@@ -275,10 +288,68 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 		return "staffMonthlyReport";
 	}
 	
-	//根据员工id查询计算出 品种-米数  数据的Map
+	//根据员工各机台的 品种和米数Map(staffMonthlyReport) 计算工资
+	private void calSalaryByStaffMonthlyReport(Map<Integer, HashMap<String, Double>> staffMonthlyReport,
+			HashMap<Integer, Double> everyMachineSalaryMap,
+			HashMap<Integer,Double> everyMachinePercentage,
+			Double sum,
+			String errMsg)
+	{
+		//2.1查询出机台倍率实体记录
+		List<SalaryPercentage> spList = dm.getList(SalaryPercentage.class);
+		//暂时只有有两种机台倍率
+		if(spList!=null && spList.size() >=1){
+			String machineNos = spList.get(0).getMachineNos();
+			List<String> asList = Arrays.asList(machineNos.split(","));
+			Double everyMachineSalary = 0D;
+			Double variety = 0D;
+			//2.2迭代并汇总计算每个机台的工资
+			for (Map.Entry<Integer, HashMap<String, Double>> staffReport : staffMonthlyReport.entrySet()) {
+				
+				HashMap<String, Double> maps = staffReport.getValue();
+				everyMachineSalary = 0D;
+				for (Map.Entry<String, Double> o : maps.entrySet()) {
+					//品种未填时有可能为""或者null
+					if(SimpleToof.checkNotNull(o.getKey())){
+						variety= Double.valueOf(o.getKey());
+						everyMachineSalary+=variety * o.getValue();//品种 * 米数
+					}
+				}
+				//不大于0没必要计算-->即品种没有填
+				if( everyMachineSalary.compareTo(0D) > 0){
+					//当前机台工资=机台的倍率 *(机台品种*米数+机台品种*米数....) =机台倍率 * sum
+					// 记录在数据库的机台号为 大倍率的，其余没有记录的默认小倍率
+					if(asList.contains(staffReport.getKey().toString())){
+						everyMachineSalary=Constants.BIG_PERCENTAGE * everyMachineSalary;
+						everyMachinePercentage.put(staffReport.getKey(), Constants.BIG_PERCENTAGE);
+					}else{
+						everyMachineSalary=Constants.LITTLE_PERCENTAGE * everyMachineSalary;
+						everyMachinePercentage.put(staffReport.getKey(), Constants.LITTLE_PERCENTAGE);
+					}
+				}
+				everyMachineSalaryMap.put(staffReport.getKey(), SimpleToof.getTypeDouble(everyMachineSalary));
+				sum +=SimpleToof.getTypeDouble(everyMachineSalary);
+			}
+			
+			this.setSum(SimpleToof.getTypeDouble(sum));
+			
+		}else{
+			errMsg = "数据库没有记录机台的倍率，请检查数据库是否有录入";
+		}
+	}
+	
+	//根据员工id查询计算出 品种-米数  数据的Map,返回 封装excel的每一行数据 的list 
 		private List<Map<String, Object>>  getStaffMonthlyDataById(String id,String createTime) throws ParseException{
 			Date date=MyDateUtils.formatDateToYearMonth(createTime);
+			
 			staffMonthlyReport = machineDailyRecordService.calculateStaffMonthlyReport(id,date);
+			
+			//根据汇总计算的staffMonthlyReport(Map)计算各机台的工资
+			everyMachinePercentage=new HashMap<Integer, Double>();//记录每种机台的工价
+			everyMachineSalaryMap =new HashMap<Integer, Double>();//记录员工每种机台的工资
+			sum = 0D;
+			this.calSalaryByStaffMonthlyReport(staffMonthlyReport, everyMachineSalaryMap, everyMachinePercentage, sum, errMsg);
+			
 			List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>();
 			
 			for (Integer no : staffMonthlyReport.keySet()) {
@@ -298,6 +369,16 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 					rowData.put("m"+count, "");
 					count++;
 				}
+				
+				//工资信息显示列
+				//工价
+				rowData.put("per", everyMachinePercentage.get(no));
+				//当前机台的金额
+				rowData.put("money", everyMachineSalaryMap.get(no));
+				//总价(放一个就好)
+				if(dataList.size()== 0)
+					rowData.put("sum", this.getSum());
+				
 				dataList.add(rowData);
 			}
 			return dataList;
@@ -309,7 +390,6 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 		if(queryObj !=null && !queryObj.getId().equalsIgnoreCase("-1") && SimpleToof.checkNotNull(createTime)){
 			try {
 				Staff staff=dm.find(Staff.class, queryObj.getId());
-	
 				
 				List<Map<String, Object>> dataList = getStaffMonthlyDataById(staff.getId(),createTime);
 				
@@ -712,6 +792,24 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 
 	public void setDateStrs(String[] dateStrs) {
 		this.dateStrs = dateStrs;
+	}
+
+	public HashMap<Integer, Double> getEveryMachineSalaryMap() {
+		return everyMachineSalaryMap;
+	}
+
+	public void setEveryMachineSalaryMap(
+			HashMap<Integer, Double> everyMachineSalaryMap) {
+		this.everyMachineSalaryMap = everyMachineSalaryMap;
+	}
+
+	public HashMap<Integer, Double> getEveryMachinePercentage() {
+		return everyMachinePercentage;
+	}
+
+	public void setEveryMachinePercentage(
+			HashMap<Integer, Double> everyMachinePercentage) {
+		this.everyMachinePercentage = everyMachinePercentage;
 	}
 	
 	

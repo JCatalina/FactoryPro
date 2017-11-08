@@ -62,6 +62,7 @@ function deleteUrl(url){
   <table class="old">
   	<tr>
   		<th colspan="11"><s:property value="queryObj.remark"/>  <s:date name='queryObj.createTime' format="yyyy-MM"/>产量</th>
+  		<th colspan="3">工资(品种或机台倍率未填时为0)</th>
   	</tr>
     <tr>
 			<th>机台号</th>
@@ -75,10 +76,13 @@ function deleteUrl(url){
 			<th>米数</th>
 			<th>品种</th>
 			<th>米数</th>
+			<th>工价</th>
+			<th>金额</th>
+			<th>总价</th>
 			
 	</tr>
 	
-   <s:iterator value="staffMonthlyReport.keySet()" id="key1">
+   <s:iterator value="staffMonthlyReport.keySet()" id="key1" status="st">
    	<tr class="dataTr">	
    		<td width="17">
    			<s:property value="#key1" />
@@ -97,6 +101,20 @@ function deleteUrl(url){
 			<td> </td>
 			<td> </td>
 		</s:iterator>
+		
+		<!-- 工资 3列 -->
+		<td>
+			<s:property value="everyMachinePercentage.get(#key1)" />
+		</td>
+		<td>
+			<s:property value="everyMachineSalaryMap.get(#key1)" />
+		</td>
+		
+		<s:if test="#st.index +1 == 1">
+			<td rowspan="<s:property value="staffMonthlyReport.keySet().size()" />">
+				<s:property value="sum"/>
+			</td>
+		</s:if>
 
 
 	</tr>
@@ -115,6 +133,7 @@ function deleteUrl(url){
    </s:iterator>
     --%>
   </table>
+	<p style="color:red;font-size:20px"><s:property value="errMsg==null?'':'错误信息：'+errMsg "/></p>
 
 </form>
 </body>

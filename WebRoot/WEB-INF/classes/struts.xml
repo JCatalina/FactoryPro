@@ -5,7 +5,6 @@
 	<constant name="struts.custom.i18n.resources" value="messageResource"/>
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
-	<constant name="struts.multipart.maxSize" value="30000000"/>
 	<constant name="struts.convention.classes.reload" value="true" />
 	
 	<include file="struts-admin.xml"></include> 

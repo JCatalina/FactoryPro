@@ -28,7 +28,8 @@ var GL_tree;
 					 		{text : "每日数据统计", attributes : {url : "admin/machineDailyRecord!list.action"} },
 					 		{text : "(员工每月)数据统计", attributes : {url : "admin/machineDailyRecord!calculateStaffMonthlyReport.action"} },
 					 		{text : "(月总量)数据统计", attributes : {url : "admin/machineDailyRecord!calculateOneMonthReport.action"} },
-					 		{text : "(机台每月)数据统计", attributes : {url : "admin/machineDailyRecord!calculateMachineMonthlyReport.action"} }
+					 		{text : "(机台每月)数据统计", attributes : {url : "admin/machineDailyRecord!calculateMachineMonthlyReport.action"} },
+					 		{text : "机台工价(倍率)设置", attributes : {url : "admin/salaryPercentage!list.action"} }
 					 	],iconCls:'icon-user'
 				 	},
            	   {text : "退出", attributes : {url : "login!loginOut.action"} ,children:[],iconCls:'icon-exit'}
