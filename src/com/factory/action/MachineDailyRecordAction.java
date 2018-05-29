@@ -295,12 +295,16 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 			Double sum,
 			String errMsg)
 	{
-		//2.1查询出机台倍率实体记录
+		//2.1查询出机台倍率实体记录,并封装成Map
 		List<SalaryPercentage> spList = dm.getList(SalaryPercentage.class);
+		HashMap<Double,List<String>> spMap =new HashMap<>();
+		for (SalaryPercentage o : spList) {
+			spMap.put(o.getPercentage(), Arrays.asList(o.getMachineNos().split(",")));
+		}
 		//暂时只有有两种机台倍率
 		if(spList!=null && spList.size() >=1){
-			String machineNos = spList.get(0).getMachineNos();
-			List<String> asList = Arrays.asList(machineNos.split(","));
+			//String machineNos = spList.get(0).getMachineNos();
+			//List<String> asList = Arrays.asList(machineNos.split(","));
 			Double everyMachineSalary = 0D;
 			Double variety = 0D;
 			//2.2迭代并汇总计算每个机台的工资
@@ -318,14 +322,18 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 				//不大于0没必要计算-->即品种没有填
 				if( everyMachineSalary.compareTo(0D) > 0){
 					//当前机台工资=机台的倍率 *(机台品种*米数+机台品种*米数....) =机台倍率 * sum
-					// 记录在数据库的机台号为 大倍率的，其余没有记录的默认小倍率
-					if(asList.contains(staffReport.getKey().toString())){
+					//数据库记录两种其他倍率，大、中(以后重构吧)
+					if(spMap.get(Constants.BIG_PERCENTAGE).contains(staffReport.getKey().toString())){
 						everyMachineSalary=Constants.BIG_PERCENTAGE * everyMachineSalary;
 						everyMachinePercentage.put(staffReport.getKey(), Constants.BIG_PERCENTAGE);
+					}else if(spMap.get(Constants.MIDDLE_PERCENTAGE).contains(staffReport.getKey().toString())){
+						everyMachineSalary=Constants.MIDDLE_PERCENTAGE * everyMachineSalary;
+						everyMachinePercentage.put(staffReport.getKey(), Constants.MIDDLE_PERCENTAGE);
 					}else{
 						everyMachineSalary=Constants.LITTLE_PERCENTAGE * everyMachineSalary;
 						everyMachinePercentage.put(staffReport.getKey(), Constants.LITTLE_PERCENTAGE);
 					}
+					
 				}
 				everyMachineSalaryMap.put(staffReport.getKey(), SimpleToof.getTypeDouble(everyMachineSalary));
 				sum +=SimpleToof.getTypeDouble(everyMachineSalary);
@@ -494,7 +502,7 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 			//查询每台机器的月记录
 			//每次查询10台，编号为 startNo~startNo+9
 			List<MachineDailyRecord> result=null;
-			//1、无151 -159
+			//1、无155 -159
 			if(startNo == 160 ){
 				result = dm.getList(MachineDailyRecord.class, 
 						"o.no = ? and DATE_FORMAT(o.createTime,'%Y%m')=DATE_FORMAT(?,'%Y%m') ", 
@@ -504,6 +512,9 @@ public class MachineDailyRecordAction extends BaseManagerAction{
 			}else{
 			//2、正常遍历
 				for(int i = startNo ; i<= startNo +4  ; i++){
+					if(i == 155){
+						continue;
+					}
 					result = dm.getList(MachineDailyRecord.class, 
 							" o.no = ? and  DATE_FORMAT(o.createTime,'%Y%m')=DATE_FORMAT(?,'%Y%m')  ", 
 							new Object[]{i,date},

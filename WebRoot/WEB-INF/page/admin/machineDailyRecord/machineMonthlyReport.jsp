@@ -21,8 +21,8 @@
 				显示区间：
 				<select name="startNo">
 					<s:iterator value="counter" begin="1" step="5" end="220" status="st">
-						<!-- 无151 -159  -->
-						<s:if test="(#st.index+1-1) * 5+1 == 151 || (#st.index+1-1) * 5+1 == 156">
+						<!-- 无155 -159  -->
+						<s:if test="(#st.index+1-1) * 5+1 == 156">
 							<option value="160"  <s:if test="160 == startNo">selected=selected</s:if> >
 								160
 							</option>
