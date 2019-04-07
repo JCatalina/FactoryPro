@@ -5,8 +5,8 @@ public interface Constants {
 	
 	public static int MACHINE_NUM=20;
 	public static final int ERROR_CODE = 404;
-	public static final double LITTLE_PERCENTAGE= 0.005; //小倍率
-	public static final double BIG_PERCENTAGE= 0.0058; //大倍率
+	public static final double LITTLE_PERCENTAGE= 0.0052; //小倍率
+	public static final double BIG_PERCENTAGE= 0.0059; //大倍率
 	public static final double MIDDLE_PERCENTAGE= 0.0052; //中倍率
 	//////////////////////////////////////////////
 	
